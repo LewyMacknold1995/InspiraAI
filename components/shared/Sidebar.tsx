@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
-import { SignedIn, SignedOut } from '@clerk/nextjs';
+// import { SignedIn, SignedOut } from '@clerk/nextjs';
 import { navLinks } from '@/constants';
 import { usePathname } from 'next/navigation';
 
@@ -24,7 +24,21 @@ const Sidebar = () => {
                 </Link>
 
                 <nav className="sidebar-nav">
-                    <SignedIn> 
+                    <ul className="sidebar-nav_elements">
+                        {navLinks.map((link) => {
+                            const isActive = link.route === pathname;
+
+                            return (
+                                <li key={link.route} className={`sidebar-nav_element group ${isActive ? 'bg-purple-gradient text-white' : 'text-gray-700'}`}>
+                                    <Link href={link.route}>
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                    {/* Temporarily remove or comment out SignedIn and SignedOut */}
+                    {/* <SignedIn> 
                         <ul className="sidebar-nav_elements">
                             {navLinks.map((link) => {
                                 const isActive = link.route === pathname;
@@ -41,7 +55,7 @@ const Sidebar = () => {
                     </SignedIn>
                     <SignedOut>
                         <p>Please sign in to view the navigation links.</p>
-                    </SignedOut>
+                    </SignedOut> */}
                 </nav>
             </div>
         </aside>
