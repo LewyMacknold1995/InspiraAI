@@ -6,6 +6,7 @@ import Image from 'next/image';
 // import { SignedIn, SignedOut } from '@clerk/nextjs';
 import { navLinks } from '@/constants';
 import { usePathname } from 'next/navigation';
+import { UserButton } from '@clerk/nextjs';
 
 const Sidebar = () => {
     const pathname = usePathname();
@@ -25,7 +26,7 @@ const Sidebar = () => {
 
                 <nav className="sidebar-nav">
                     <ul className="sidebar-nav_elements">
-                        {navLinks.map((link) => {
+                        {navLinks.slice(0, 6).map((link) => {
                             const isActive = link.route === pathname;
 
                             return (
@@ -37,6 +38,25 @@ const Sidebar = () => {
                                 </li>
                             );
                         })}
+                    </ul>
+
+                    <ul>
+                    {navLinks.slice(6).map((link) => {
+                            const isActive = link.route === pathname;
+
+                            return (
+                                <li key={link.route} className={`sidebar-nav_element group flex items-center gap-2 p-2 rounded-md ${isActive ? 'bg-purple-gradient text-white' : 'text-gray-700 hover:bg-gray-200'}`}>
+                                    <Link href={link.route} className="sidebar-link flex items-center gap-2">
+                                        <Image src={link.icon} alt={link.label} width={24} height={24} className={`${isActive ? 'brightness-200' : 'brightness-100'}`} />
+                                        <span className="sidebar-label">{link.label}</span>
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                        <li className="flex-center cursor-pointer gap-2 p-4">
+                            <UserButton afterSignOutUrl='/' showName />
+
+                        </li>
                     </ul>
                     {/* Temporarily remove or comment out SignedIn and SignedOut */}
                     {/* <SignedIn> 
@@ -55,7 +75,9 @@ const Sidebar = () => {
                         </ul>
                     </SignedIn>
                     <SignedOut>
-                        <p>Please sign in to view the navigation links.</p>
+                            <Button asChild className="button bg-purple-gradient bg-cover">
+                                <Link href="/sign-in">Login</Link>
+                            </Button>
                     </SignedOut> */}
                 </nav>
             </div>
