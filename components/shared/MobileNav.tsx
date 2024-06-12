@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from 'react';
 import {
@@ -44,14 +44,14 @@ const MobileNav = () => {
                                 width={152}
                                 height={23}
                             />
-                            <ul className="sidebar-nav_elements">
+                            <ul className="header-nav_elements">
                                 {navLinks.map((link) => {
                                     const isActive = link.route === pathname;
 
                                     return (
-                                        <li key={link.route} className={`sidebar-nav_element group flex items-center gap-2 p-2 rounded-md ${isActive ? 'bg-purple-gradient text-white' : 'text-gray-700 hover:bg-gray-200'}`}>
+                                        <li key={link.route} className={`p-2 flex whitespace-nowrap ${isActive ? 'gradient-text' : 'text-dark-700'}`}>
                                             <Link href={link.route} className="sidebar-link flex items-center gap-2">
-                                                <Image src={link.icon} alt={link.label} width={24} height={24} className={`${isActive ? 'brightness-200' : 'brightness-100'}`} />
+                                                <Image src={link.icon} alt={link.label} width={24} height={24} />
                                                 <span className="sidebar-label">{link.label}</span>
                                             </Link>
                                         </li>
@@ -60,7 +60,7 @@ const MobileNav = () => {
                             </ul>
                         </SheetContent>
                     </Sheet>
-                {/* </SignedIn>  */}
+                {/* </SignedIn> */}
             </nav>
         </header>
     );
