@@ -50,7 +50,7 @@ const MobileNav = () => {
 
                                     return (
                                         <li key={link.route} className={`p-2 flex whitespace-nowrap ${isActive ? 'gradient-text' : 'text-dark-700'}`}>
-                                            <Link href={link.route} className="sidebar-link flex items-center gap-2">
+                                            <Link href={link.route} className="sidebar-link cursor-pointer flex items-center gap-2">
                                                 <Image src={link.icon} alt={link.label} width={24} height={24} />
                                                 <span className="sidebar-label">{link.label}</span>
                                             </Link>
